@@ -1,0 +1,61 @@
+RandomlyGeneratedBattles
+
+GUI:
+User Interface stuff
+
+Player:
+Manage characters
+Get new characters
+Has list of characters
+
+Enemy:
+Randomly generated or pulled from specials
+
+Characters:
+Ranked by tiers
+Tiers mean more or less stats/moves
+Special resource for attacking
+Arranged by types
+Can tier up
+Parent of SpecialCharacters
+
+Moves:
+Has bunch of moves
+Randomly assigns to characters
+Some moves are unique to character type/special character
+
+SpecialCharacters:
+Special Preset Characters
+Have unique moves
+Parent to all of them
+
+Lumi:
+Tier 1 special character
+Gunslinger
+8 resource
+
+Roland:
+Tier 1 special character
+Melee
+10 resource
+
+Jaja:
+Tier 1 special character
+Gunslinger
+Self insert lmao
+30 resource
+
+Ngy
+Tier 1 special character
+Wizard
+5 resource
+
+El Racisto
+Tier 4 special character
+Shielder
+1 resource
+
+John Xina
+Tier 2 special character
+Melee
+4 resource

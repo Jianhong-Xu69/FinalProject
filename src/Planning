@@ -1,5 +1,7 @@
 RandomlyGeneratedBattles
 
+Get things to work first before working on graphics
+
 GUI:
 User Interface stuff
 
@@ -30,23 +32,23 @@ Have unique moves
 Parent to all of them
 
 Lumi:
-Tier 1 special character
+Tier 0 special character
 Gunslinger
 8 resource
 
 Roland:
-Tier 1 special character
+Tier 0 special character
 Melee
 10 resource
 
 Jaja:
-Tier 1 special character
+Tier 0 special character
 Gunslinger
 Self insert lmao
 30 resource
 
 Ngy
-Tier 1 special character
+Tier 0 special character
 Wizard
 5 resource
 

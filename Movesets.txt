@@ -1,0 +1,32 @@
+Gunslinger:
+Reload
+Shot
+Focus Fire
+Rapid Shot
+Precise Shot
+Magdump
+
+Melee:
+Slash
+Cleave
+Bludgeon
+Stab
+Parry
+Heavy Slash
+Hack
+
+Wizard:
+Heal
+Fireball
+Acid Storm
+Ensnare
+Inspire
+Resurrect
+Protection
+
+Shielder:
+Block
+Parry
+Bash
+Defend
+Bomb

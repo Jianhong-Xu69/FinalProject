@@ -1,0 +1,7 @@
+Test
+Tier: 4
+Type: Gunslinger
+Health: 5
+Resource: 6
+Stat Array: [1, 2, 3, 4, 5, 6]
+Moveset: [Test, 123, Guns]

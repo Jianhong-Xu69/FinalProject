@@ -67,24 +67,20 @@ public class Character {
         return resource;
     }
     public String getStats() {
-        String temp = "Stat Array: ";
-        temp += Arrays.toString(stats);
-        return temp;
+        return Arrays.toString(stats);
     }
     public String getMoves() {
-        String temp = "Moveset: ";
-        temp += moves;
-        return temp;
+        return moves.toString();
     }
 
     public String toString() {
-        return getName() + "\nTier: " + getTier() + "\nType: " + getType() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\n" + getStats() + "\n" + getMoves();
+        return getName() + "\nTier: " + getTier() + "\nType: " + getType() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
     }
 
     public void writeToFile() {
         try {
             FileWriter myWriter = new FileWriter("Characters.txt");
-            myWriter.write(toString());
+            myWriter.write(getName() + "\n" + getTier() + "\n" + type + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

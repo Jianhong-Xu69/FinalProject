@@ -80,7 +80,8 @@ public class Character {
     public void writeToFile() {
         try {
             FileWriter myWriter = new FileWriter("Characters.txt");
-            myWriter.write(getName() + "\n" + getTier() + "\n" + type + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
+            myWriter.write(getName() + "\n" + getTier() + "\n" + type
+                    + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

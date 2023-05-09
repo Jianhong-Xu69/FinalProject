@@ -21,7 +21,9 @@ public class ReadFile {
             int health = Integer.parseInt(Files.readAllLines(of).get(n+3));
             int resource = Integer.parseInt(Files.readAllLines(of).get(n+4));
             int[] stats = statRead(Files.readAllLines(of).get(n+5));
-            System.out.println(Arrays.toString(stats));
+            for (int i = 0; i < 6; i++) {
+                System.out.println(stats[i]);
+            }
 //            Character test = new Character();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -29,14 +31,12 @@ public class ReadFile {
     }
 
     public static int[] statRead (String s){
-        int[] temp = new int[6];
-        temp[0] = Integer.parseInt(s.substring(s.indexOf("[")+1, s.indexOf(",")));
-        s = s.substring(s.indexOf(",")+2);
-        for (int i = 1; i < 6; i++) {
-            temp[i] = Integer.parseInt(s.substring(0, s.indexOf(",")));
-            s = s.substring(s.indexOf(",")+2);
+        int[] array = new int[6];
+        s = s.substring(1, s.length()-1);
+        String[] temp = s.split(", ");
+        for (int i = 0; i < 6; i++) {
+            array[i] = Integer.parseInt(temp[i]);
         }
-        temp[6] = Integer.parseInt(s.substring(0, s.indexOf("]")));
-        return temp;
+        return array;
     }
 }

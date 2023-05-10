@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,28 +14,31 @@ public class ReadFile {
         int n = 0; // The line number
         try{
             Path of = Path.of("Characters.txt");
-            String name = Files.readAllLines(of).get(n);
-            System.out.println(name);
+            int type = Integer.parseInt(Files.readAllLines(of).get(n).substring(0,1));
+            String name = Files.readAllLines(of).get(n).substring(1);
             int tier = Integer.parseInt(Files.readAllLines(of).get(n+1));
-            System.out.println(tier);
-            int type = Integer.parseInt(Files.readAllLines(of).get(n+2));
-            int health = Integer.parseInt(Files.readAllLines(of).get(n+3));
-            int resource = Integer.parseInt(Files.readAllLines(of).get(n+4));
-            int[] stats = statRead(Files.readAllLines(of).get(n+5));
-            for (int i = 0; i < 6; i++) {
-                System.out.println(stats[i]);
-            }
-//            Character test = new Character();
+            int health = Integer.parseInt(Files.readAllLines(of).get(n+2));
+            int resource = Integer.parseInt(Files.readAllLines(of).get(n+3));
+            int[] stats = arrayRead(Files.readAllLines(of).get(n+4));
+            int[] moves = arrayRead(Files.readAllLines(of).get(n+5));
+            Gunslinger test = new Gunslinger(name, tier, health, resource, stats, moves);
+            System.out.println(test);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static int[] statRead (String s){
-        int[] array = new int[6];
+    public static int[] arrayRead (String s){
+        int count = 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (String.valueOf(s.charAt(i)).equals(",")){
+                count++;
+            }
+        }
+        int[] array = new int[count];
         s = s.substring(1, s.length()-1);
         String[] temp = s.split(", ");
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < temp.length; i++) {
             array[i] = Integer.parseInt(temp[i]);
         }
         return array;

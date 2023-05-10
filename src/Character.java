@@ -1,29 +1,23 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Character {
     private String name;
     private int tier;
-    private int type;
     private int health;
     private int resource;
-    private int[] stats;//first element is max health, second is max resource, third is speed, fourth is accuracy die, fifth is damage die, six is dodge die
-    private ArrayList<String> moves;
+    private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is accuracy die, 4 is damage die, 5 is dodge die
+    private int[] speed;
+    private int[] moves;
 
-    public Character(int t, int ty){
-        tier = t;
-        type = ty;
-        stats = new int[6];
-    }
-    public Character(String n, int t, int ty, int h, int r, int[] st, ArrayList<String> mo){ //framework for reading characters from files
+    public Character(String n, int t, int h, int r, int[] st, int[] mo){ //framework for reading characters from files
         name = n;
         tier = t;
-        type = ty;
         health = h;
         resource = r;
         stats = st;
+        speed = new int[getSpecificStat(2)];
         moves = mo;
     }
 
@@ -39,7 +33,18 @@ public class Character {
             stats[i] = s[i];
         }
     }
-    public void setMoves(ArrayList<String> m) {
+    public void rollSpeed(){
+        int[] temp = new int[speed.length];
+        for (int i = 0; i < speed.length; i++) {
+            temp[i] = (int) (Math.random()*20+1);
+        }
+        Arrays.sort(temp);
+        for (int i = 0; i < temp.length; i++) {
+            speed[i] = temp[temp.length-1-i];
+        }
+        System.out.println(Arrays.toString(speed));
+    }
+    public void setMoves(int[] m) {
         moves = m;
     }
 
@@ -48,17 +53,6 @@ public class Character {
     }
     public int getTier() {
         return tier;
-    }
-    public String getType() {
-        if (type == 1){
-            return "Gunslinger";
-        } else if (type == 2){
-            return "Melee";
-        } else if (type == 3){
-            return "Wizard";
-        } else {
-            return "Shielder";
-        }
     }
     public int getHealth() {
         return health;
@@ -69,24 +63,27 @@ public class Character {
     public String getStats() {
         return Arrays.toString(stats);
     }
+    //prerequisite: 0 <= s <= 5
+    public int getSpecificStat(int s){
+        return stats[s];
+    }
     public String getMoves() {
-        return moves.toString();
+        return Arrays.toString(moves);
     }
 
     public String toString() {
-        return getName() + "\nTier: " + getTier() + "\nType: " + getType() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
+        return getName() + "\nTier: " + getTier() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
     }
 
-    public void writeToFile() {
+    public String writeToFile() {
         try {
             FileWriter myWriter = new FileWriter("Characters.txt");
-            myWriter.write(getName() + "\n" + getTier() + "\n" + type
-                    + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
+            myWriter.write(getName() + "\n" + getTier() + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            return "Successfully wrote to the file.";
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
+            return "An error occurred.";
         }
     }
 }

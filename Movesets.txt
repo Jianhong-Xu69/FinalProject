@@ -9,11 +9,10 @@ Magdump
 Melee:
 Slash
 Cleave
+Parry
 Bludgeon
 Stab
-Parry
 Heavy Slash
-Hack
 
 Wizard:
 Heal
@@ -22,7 +21,6 @@ Acid Storm
 Ensnare
 Inspire
 Resurrect
-Protection
 
 Shielder:
 Block
@@ -30,3 +28,4 @@ Parry
 Bash
 Defend
 Bomb
+Protect

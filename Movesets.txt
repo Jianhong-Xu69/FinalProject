@@ -2,8 +2,8 @@ Gunslinger:
 Reload
 Shot
 Focus Fire
-Rapid Shot
-Precise Shot
+Rapid Fire
+Precise Burst
 Magdump
 
 Melee:

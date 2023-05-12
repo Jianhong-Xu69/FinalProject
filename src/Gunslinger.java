@@ -3,57 +3,52 @@ import java.io.IOException;
 
 public class Gunslinger extends Character {
 
-    public Gunslinger(String n, int t, int h, int r, int[] st, int[] mo) {
-        super(n, t, h, r, st, mo);
+    public Gunslinger(String n, int t, int[] st, int[] mo) {
+        super(n, t, st, mo);
     }
 
-    public String reload() {
-        setResource(getSpecificStat(2));
-        return "reloaded";
+    public int move0() {//reload, replenishes all resources(ammunition)
+        setResource(getSpecificStat(1));
+        return 0;
     }
 
-    public int shot(boolean attack, int c){//attacking or not, clash to hit
-        int hitRoll = (int) (Math.random()*6+1);
+    public int move1(){//shot, consumes 1 ammunition to fire
+        int hitRoll = (int) (Math.random()*getSpecificStat(3)+1);
         setResource(getResource()-1);
-        if (attack){
-            if (hitRoll > c){
-                return (int) (Math.random()*getSpecificStat(4)+1);
+        return hitRoll;
+    }
+
+    public int move2(){//focusedFire, consumes 2 ammunition to fire an accurate burst
+        int hitroll = (int) (move1()*1.5 + move1()*1.5);
+        return hitroll;
+    }
+
+    public int move3(){//rapidFire, consumes 5 ammunition to fire a rapid burst
+        int hitroll = move1() + move1() + move1() + move1() + move1();
+        return hitroll;
+    }
+
+    public int move4(){//preciseBurst, consumes 3 ammunition to fire a precise burst
+        int hitroll = move2() + move1();
+        return hitroll;
+    }
+
+    public int move5(){//magdump, consumes all ammunition and fires off entire magazine
+        int hitroll = 0;
+        int currentMag = getResource();
+        for (int i = 0; i < currentMag; i++) {
+            int coin = (int) (Math.random()*2) + 1;
+            if (coin == 1){
+                hitroll += move1();
             } else {
-                return 0;
-            }
-        } else {
-            if (hitRoll > c){
-                return (int) (Math.random()*getSpecificStat(4)+1);
-            } else if (hitRoll == c){
-                return 0;
-            } else {
-                return -1;
+                hitroll += (int) (move1() * 1.5);
             }
         }
-    }
-
-    public int focusFire(boolean attack, int c){//attacking or not, clash to hit
-        int hitRoll = (int) (Math.random()*getSpecificStat(3)*1.5+1);
-        setResource(getResource()-1);
-        if (attack){
-            if (hitRoll > c){
-                return (int) (Math.random()*getSpecificStat(4)+1);
-            } else {
-                return 0;
-            }
-        } else {
-            if (hitRoll/2 > c){
-                return (int) (Math.random()*getSpecificStat(4)+1);
-            } else if (hitRoll == c){
-                return 0;
-            } else {
-                return -1;
-            }
-        }
+        return hitroll;
     }
 
     public String toString() {
-        return "Gunslinger " + super.toString();
+        return "Gunslinger " + getName() + "\nTier: " + getTier() + "\nHealth: " + getHealth() + "\nAmmunition: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
     }
 
     public String writeToFile() {

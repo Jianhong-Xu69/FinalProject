@@ -7,17 +7,17 @@ public class Character {
     private int tier;
     private int health;
     private int resource;
-    private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is accuracy die, 4 is damage die, 5 is dodge die
+    private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is damage die
     private int[] speed;
     private int[] moves;
 
-    public Character(String n, int t, int h, int r, int[] st, int[] mo){ //framework for reading characters from files
+    public Character(String n, int t, int[] st, int[] mo){ //framework for reading characters from files
         name = n;
         tier = t;
-        health = h;
-        resource = r;
+        health = st[0];
+        resource = st[1];
         stats = st;
-        speed = new int[getSpecificStat(2)];
+        speed = new int[st[2]];
         moves = mo;
     }
 
@@ -69,6 +69,25 @@ public class Character {
     }
     public String getMoves() {
         return Arrays.toString(moves);
+    }
+
+    public int move0(){
+        return 0;
+    }
+    public int move1(){
+        return 0;
+    }
+    public int move2(){
+        return 0;
+    }
+    public int move3(){
+        return 0;
+    }
+    public int move4(){
+        return 0;
+    }
+    public int move5(){
+        return 0;
     }
 
     public String toString() {

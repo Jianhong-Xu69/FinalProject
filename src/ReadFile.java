@@ -21,7 +21,7 @@ public class ReadFile {
             int resource = Integer.parseInt(Files.readAllLines(of).get(n+3));
             int[] stats = arrayRead(Files.readAllLines(of).get(n+4));
             int[] moves = arrayRead(Files.readAllLines(of).get(n+5));
-            Gunslinger test = new Gunslinger(name, tier, health, resource, stats, moves);
+            Gunslinger test = new Gunslinger(name, tier, stats, moves);
             System.out.println(test);
         } catch (IOException e) {
             throw new RuntimeException(e);

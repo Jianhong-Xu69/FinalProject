@@ -4,21 +4,17 @@ import java.util.Arrays;
 
 public class Character {
     private String name;
-    private int tier;
     private int health;
     private int resource;
     private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is damage die
     private int[] speed;
-    private int[] moves;
 
-    public Character(String n, int t, int[] st, int[] mo){ //framework for reading characters from files
+    public Character(String n, int[] st){ //framework for reading characters from files
         name = n;
-        tier = t;
         health = st[0];
         resource = st[1];
         stats = st;
         speed = new int[st[2]];
-        moves = mo;
     }
 
     public void setHealth(int h) {
@@ -44,15 +40,9 @@ public class Character {
         }
         System.out.println(Arrays.toString(speed));
     }
-    public void setMoves(int[] m) {
-        moves = m;
-    }
 
     public String getName() {
         return name;
-    }
-    public int getTier() {
-        return tier;
     }
     public int getHealth() {
         return health;
@@ -66,9 +56,6 @@ public class Character {
     //prerequisite: 0 <= s <= 5
     public int getSpecificStat(int s){
         return stats[s];
-    }
-    public String getMoves() {
-        return Arrays.toString(moves);
     }
 
     public int move0(){
@@ -91,18 +78,10 @@ public class Character {
     }
 
     public String toString() {
-        return getName() + "\nTier: " + getTier() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
+        return getName() + "\nHealth: " + getHealth() + "\nResource: " + getResource() + "\nStats Array: " + getStats();
     }
 
-    public String writeToFile() {
-        try {
-            FileWriter myWriter = new FileWriter("Characters.txt");
-            myWriter.write(getName() + "\n" + getTier() + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
-            myWriter.close();
-            return "Successfully wrote to the file.";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "An error occurred.";
-        }
+    public String prepareForFile() {
+            return getName() + "\n" + getStats();
     }
 }

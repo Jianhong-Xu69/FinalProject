@@ -3,8 +3,8 @@ import java.io.IOException;
 
 public class Gunslinger extends Character {
 
-    public Gunslinger(String n, int t, int[] st, int[] mo) {
-        super(n, t, st, mo);
+    public Gunslinger(String n, int[] st) {
+        super(n, st);
     }
 
     public int move0() {//reload, replenishes all resources(ammunition)
@@ -24,7 +24,7 @@ public class Gunslinger extends Character {
     }
 
     public int move3(){//rapidFire, consumes 5 ammunition to fire a rapid burst
-        int hitroll = move1() + move1() + move1() + move1() + move1();
+        int hitroll = move1() + move1() + move1() + move2();
         return hitroll;
     }
 
@@ -48,18 +48,10 @@ public class Gunslinger extends Character {
     }
 
     public String toString() {
-        return "Gunslinger " + getName() + "\nTier: " + getTier() + "\nHealth: " + getHealth() + "\nAmmunition: " + getResource() + "\nStats Array: " + getStats() + "\nMoveset: " + getMoves();
+        return "Gunslinger " + getName() + "\nHealth: " + getHealth() + "\nAmmunition: " + getResource() + "\nStats Array: " + getStats();
     }
 
-    public String writeToFile() {
-        try {
-            FileWriter myWriter = new FileWriter("Characters.txt");
-            myWriter.write(1 + getName() + "\n" + getTier() + "\n" + getHealth() + "\n" + getResource() + "\n" + getStats() + "\n" + getMoves());
-            myWriter.close();
-            return "Successfully wrote to the file.";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "An error occurred.";
-        }
+    public String prepareForFile() {
+        return 1 + super.prepareForFile();
     }
 }

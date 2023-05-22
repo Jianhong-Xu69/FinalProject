@@ -1,6 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Melee extends Character {
 
     public Melee (String n, int[] st) {
@@ -26,19 +23,6 @@ public class Melee extends Character {
         int hitRoll = move1() + move0();
         setResource(getResource()-1);
         return hitRoll;
-    }
-    public int move4(){//stab, cost 2 stamina
-        int hitroll = move1() + move0();
-        if ((int) (Math.random()*4) + 1 == 4){
-            hitroll *= 2;
-        }
-        setResource(getResource()-1);
-        return hitroll;
-
-    }
-    public int move5(){//heavySlash, cost 3 stamina
-        int hitroll = move4() + move1();
-        return hitroll;
     }
 
     public String toString() {

@@ -3,29 +3,21 @@ Reload
 Shot
 Focus Fire
 Rapid Fire
-Precise Burst
-Magdump
 
 Melee:
 Slash
 Cleave
 Parry
 Bludgeon
-Stab
-Heavy Slash
 
 Wizard:
 Heal
 Fireball
 Acid Storm
 Ensnare
-Inspire
-Resurrect
 
 Shielder:
 Block
 Parry
 Bash
 Defend
-Bomb
-Protect

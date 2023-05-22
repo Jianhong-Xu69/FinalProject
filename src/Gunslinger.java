@@ -1,6 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Gunslinger extends Character {
 
     public Gunslinger(String n, int[] st) {
@@ -28,24 +25,6 @@ public class Gunslinger extends Character {
         return hitroll;
     }
 
-    public int move4(){//preciseBurst, consumes 3 ammunition to fire a precise burst
-        int hitroll = move2() + move1();
-        return hitroll;
-    }
-
-    public int move5(){//magdump, consumes all ammunition and fires off entire magazine
-        int hitroll = 0;
-        int currentMag = getResource();
-        for (int i = 0; i < currentMag; i++) {
-            int coin = (int) (Math.random()*2) + 1;
-            if (coin == 1){
-                hitroll += move1();
-            } else {
-                hitroll += (int) (move1() * 1.5);
-            }
-        }
-        return hitroll;
-    }
 
     public String toString() {
         return "Gunslinger " + getName() + "\nHealth: " + getHealth() + "\nAmmunition: " + getResource() + "\nStats Array: " + getStats();

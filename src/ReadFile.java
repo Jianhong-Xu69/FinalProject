@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReadFile {
-    public static void main(String[] args) {
+    public static void fileRead() {
         try{
             Path of = Path.of("Characters.txt");
             int fileLength = 0;
@@ -27,6 +27,8 @@ public class ReadFile {
                     test = new Gunslinger(name, stats);
                 } else if (type == 2) {
                     test = new Melee(name, stats);
+                } else if (type == 3){
+                    test = new Wizard(name, stats);
                 } else {
                     test = new Character(name, stats);
                 }
@@ -51,5 +53,41 @@ public class ReadFile {
             array[i] = Integer.parseInt(temp[i]);
         }
         return array;
+    }
+
+    public static void prepWriteFile (Character[] c){
+        String temp = "";
+        for (Character cha: c){
+            temp += cha.prepareForFile();
+        }
+        System.out.println(writeToFile(temp));
+    }
+
+    public static String writeToFile(String text){
+        try {
+            FileWriter myWriter = new FileWriter("Characters.txt");
+            myWriter.write(text);
+            myWriter.close();
+            return "Successfully wrote to the file.";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "An error occurred.";
+        }
+    }
+
+    public static String readNames(){
+        String names = "";
+        try{
+            Path of = Path.of("Characters.txt");
+            int fileLength = 0;
+            ArrayList<String> allLines = (ArrayList<String>) Files.readAllLines(of);
+            fileLength = allLines.size();
+            for (int n = 0; n < fileLength; n++) {
+                names += Files.readAllLines(of).get(n);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return names;
     }
 }

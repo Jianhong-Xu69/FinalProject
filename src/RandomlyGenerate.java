@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class RandomlyGenerate {
 
     public static int[] randomStats(){
@@ -14,22 +17,21 @@ public class RandomlyGenerate {
     }
 
     public static String randomName(){
-        String names = ReadFile.readNames();
-        for (int i = 0; i < 16; i++) {
-
-        }
+        ArrayList<String> names = ReadFile.readNames();
+        return names.get((int) (Math.random()*names.size()));
     }
 
     public static Character randomCharacter(){
         int cl = (int) (Math.random()*3)+1;
         int[] stats = randomStats();
         Character random;
+        String name = randomName();
         if (cl == 1){
-            random = new Gunslinger()
+            random = new Gunslinger(name, stats);
         } else if (cl == 2) {
-
+            random = new Melee(name, stats);
         } else {
-
+            random = new Wizard(name, stats);
         }
         return random;
     }

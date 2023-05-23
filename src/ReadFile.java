@@ -75,16 +75,12 @@ public class ReadFile {
         }
     }
 
-    public static String readNames(){
-        String names = "";
+    public static ArrayList<String> readNames(){
+        ArrayList<String> names;
         try{
-            Path of = Path.of("Characters.txt");
+            Path of = Path.of("RandomNames.txt");
             int fileLength = 0;
-            ArrayList<String> allLines = (ArrayList<String>) Files.readAllLines(of);
-            fileLength = allLines.size();
-            for (int n = 0; n < fileLength; n++) {
-                names += Files.readAllLines(of).get(n);
-            }
+            names = (ArrayList<String>) Files.readAllLines(of);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

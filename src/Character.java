@@ -6,12 +6,14 @@ public class Character {
     private int resource;
     private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is damage die
     private int speed;
+    private int[] moves;//rolls moveset
 
     public Character(String n, int[] st){ //framework for reading characters from files
         name = n;
         health = st[0];
         resource = st[1];
         stats = st;
+        moves = new int[5];
     }
 
     public void setHealth(int h) {
@@ -27,8 +29,12 @@ public class Character {
         }
     }
     public void rollSpeed(){
-        int temp;
-        temp = (int) (Math.random()*20+getSpecificStat(2));
+        speed = (int) (Math.random()*20+getSpecificStat(2));
+    }
+    public void rollMoves(){
+        for (int i = 1; i < moves.length; i++) {
+            int mov = (int) (Math.random()*3)+1;
+        }
     }
 
     public String getName() {

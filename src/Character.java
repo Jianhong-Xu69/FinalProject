@@ -33,7 +33,7 @@ public class Character {
     }
     public void rollMoves(){
         for (int i = 1; i < moves.length; i++) {
-            int mov = (int) (Math.random()*3)+1;
+            int mov = (int) (Math.random()*4);
         }
     }
 
@@ -65,6 +65,13 @@ public class Character {
     }
     public int move3(){
         return 0;
+    }
+
+    public int[] getMoves() {
+        return moves;
+    }
+    public int getSpeed() {
+        return speed;
     }
 
     public String toString() {

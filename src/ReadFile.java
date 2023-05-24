@@ -11,17 +11,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReadFile {
-    public static void fileRead() {
+    public static Character[] fileRead() {
         try{
             Path of = Path.of("Characters.txt");
-            int fileLength = 0;
+            int fileLength;
+            Character[] temp = new Character[3];
             ArrayList<String> allLines = (ArrayList<String>) Files.readAllLines(of);
             fileLength = allLines.size();
+            int i = 0;
             for (int n = 0; n < fileLength; n+=2) {
                 int type = Integer.parseInt(Files.readAllLines(of).get(n).substring(0, 1));
                 String name = Files.readAllLines(of).get(n).substring(1);
                 int[] stats = arrayRead(Files.readAllLines(of).get(n + 1));
-                n += 2;
                 Character test;
                 if (type == 1) {
                     test = new Gunslinger(name, stats);
@@ -32,8 +33,12 @@ public class ReadFile {
                 } else {
                     test = new Character(name, stats);
                 }
-                System.out.println(test);
+                if (i < 3) {
+                    temp[i] = test;
+                    i++;
+                }
             }
+            return temp;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,12 +60,12 @@ public class ReadFile {
         return array;
     }
 
-    public static void prepWriteFile (Character[] c){
+    public static String prepWriteFile (Character[] c){
         String temp = "";
         for (Character cha: c){
-            temp += cha.prepareForFile();
+            temp += cha.prepareForFile() + "\n";
         }
-        System.out.println(writeToFile(temp));
+        return temp;
     }
 
     public static String writeToFile(String text){

@@ -27,7 +27,7 @@ public class Wizard extends Character{
 
 
     public String toString() {
-        return "Wizard " + getName() + "\nHealth: " + getHealth() + "\nAmmunition: " + getResource() + "\nStats Array: " + getStats();
+        return "Wizard " + getName() + "\nHealth: " + getHealth() + "\nMana: " + getResource() + "\nStats Array: " + getStats();
     }
 
     public String prepareForFile() {

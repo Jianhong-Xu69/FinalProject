@@ -7,6 +7,7 @@ public class Character {
     private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is damage die
     private int speed;
     private int[] moves;//rolls moveset
+    private boolean defeated;
 
     public Character(String n, int[] st){ //framework for reading characters from files
         name = n;
@@ -14,10 +15,16 @@ public class Character {
         resource = st[1];
         stats = st;
         moves = new int[5];
+        defeated = false;
     }
 
     public void setHealth(int h) {
         health = h;
+        if (health <= 0){
+            defeated = true;
+        } else {
+            defeated = false;
+        }
     }
     public void setResource(int r) {
         resource = r;
@@ -52,6 +59,10 @@ public class Character {
     //prerequisite: 0 <= s <= 5
     public int getSpecificStat(int s){
         return stats[s];
+    }
+
+    public boolean isDefeated() {
+        return defeated;
     }
 
     public int move0(){

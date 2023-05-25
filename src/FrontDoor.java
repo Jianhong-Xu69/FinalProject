@@ -7,6 +7,8 @@ public class FrontDoor {//Misc Test class
         Player test = new Player();
         test.pullFromFile();
         Combat tes = new Combat(test);
-        System.out.println(Arrays.toString(tes.generateTurnOrder()));
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Target " + tes.findTarget() + "\n");
+        }
     }
 }

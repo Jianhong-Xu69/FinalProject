@@ -37,7 +37,7 @@ public class Combat {
         return turnOrder;
     }
 
-    public int makeMove(Character c, int i){
+    public int makeMove(Character c, int i){//choose element i of Moves list to make move.
         if (c.getMoves()[i] == 0){
             return c.move0();
         } else if (c.getMoves()[i] == 1){
@@ -48,5 +48,33 @@ public class Combat {
             return c.move3();
         }
         return 0;
+    }
+
+    public int findTarget(){//recursive target search
+        int target = (int) (Math.random()*3);
+        int random = 0;
+        if (player.getParty()[target] instanceof Wizard && !player.getParty()[target].isDefeated()){
+            random = (int) (Math.random()*2)+1;
+            if (random != 2){
+                return target;
+            } else {
+                target = findTarget();
+            }
+        } else if (player.getParty()[target] instanceof Gunslinger && !player.getParty()[target].isDefeated()) {
+            random = (int) (Math.random()*3)+1;
+            if (random != 3){
+                return target;
+            } else {
+                target = findTarget();
+            }
+        } else if (player.getParty()[target] instanceof Melee && !player.getParty()[target].isDefeated()) {
+            random = (int) (Math.random()*4)+1;
+            if (random != 4){
+                return target;
+            } else {
+                target = findTarget();
+            }
+        }
+        return target;
     }
 }

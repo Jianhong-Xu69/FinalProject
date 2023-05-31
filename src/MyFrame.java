@@ -29,7 +29,7 @@ public class MyFrame extends JFrame implements ActionListener{
             partymember.setOpaque(true);
             partymember.setHorizontalTextPosition(JLabel.CENTER);
             partymember.setVerticalTextPosition(JLabel.TOP); //above, center, below
-            partymember.setBounds(640-character.getIconWidth(), 300-character.getIconHeight(),  character.getIconWidth(), 330);
+            partymember.setBounds(640-character.getIconWidth(), 305-character.getIconHeight(),  character.getIconWidth(), 330);
 
             if (i == 0) {
                 party1 = new JButton();

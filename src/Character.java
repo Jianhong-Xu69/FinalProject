@@ -6,7 +6,7 @@ public class Character {
     private int resource;
     private int[] stats;//0 element is max health, 1 is max resource, 2 is speed, 3 is damage die
     private int speed;
-    private int[] moves;//rolls moveset
+    private int[] moves;//rolls moveset, usually 3
     private boolean defeated;
 
     public Character(String n, int[] st){ //framework for reading characters from files
@@ -40,7 +40,7 @@ public class Character {
     }
     public void rollMoves(){
         for (int i = 1; i < moves.length; i++) {
-            int mov = (int) (Math.random()*4);
+            moves[i] = (int) (Math.random()*4);
         }
     }
 

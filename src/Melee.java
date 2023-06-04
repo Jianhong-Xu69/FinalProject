@@ -14,7 +14,7 @@ public class Melee extends Character {
         setResource(getResource()-1);
         return hitRoll;
     }
-    public int move2(){//parry, cost 1 stamina, restores 2
+    public int move2(){//parry, cost 1 stamina
         int hitRoll = move0();
         setResource(getResource()+1);
         return hitRoll;

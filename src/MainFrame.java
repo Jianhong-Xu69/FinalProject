@@ -3,28 +3,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyFrame extends JFrame implements ActionListener{
-
+public class MainFrame extends JFrame implements ActionListener{
     JButton party1;
     JButton party2;
     JButton party3;
+    Character[] party;
 
-    MyFrame(Character[] party) {
+    public void mainGUI(Character[] p) {
+        party = p;
         for (int i = 0; i < 3; i++) {
             ImageIcon character;
             JLabel partymember;
-            if (party[i] instanceof Gunslinger) {
+            if (p[i] instanceof Gunslinger) {
                 character = new ImageIcon("src/sprites/GSidle.png");//rightclick on image, copy path from source root
-            } else if (party[i] instanceof Melee) {
+            } else if (p[i] instanceof Melee) {
                 character = new ImageIcon("src/sprites/MeleeIdle.png");
             } else {
                 character = new ImageIcon("src/sprites/Wizidle.png");
             }
 
             partymember = new JLabel();
-            partymember.setText(party[i].getName());
+            partymember.setText(p[i].getName());
             partymember.setIcon(character);
-            partymember.setForeground(new Color(0, 150, 255));
+            partymember.setForeground(new Color(0, 0, 0));
             partymember.setBackground(new Color(255, 255, 255));
             partymember.setOpaque(true);
             partymember.setHorizontalTextPosition(JLabel.CENTER);
@@ -65,13 +66,13 @@ public class MyFrame extends JFrame implements ActionListener{
         this.add(party1);
         this.add(party2);
         this.add(party3);
-
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== party1){
-            System.out.println("Hey");
+            new MovesFrame(party[0]);
         } else if (e.getSource()== party2){
             System.out.println("Test");
         } else if (e.getSource()== party3){

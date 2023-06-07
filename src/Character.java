@@ -39,8 +39,17 @@ public class Character {
         speed = (int) (Math.random()*20+getSpecificStat(2));
     }
     public void rollMoves(){
-        for (int i = 1; i < moves.length; i++) {
-            moves[i] = (int) (Math.random()*4);
+        for (int i = 0; i < moves.length; i++) {
+            int move = (int) (Math.random()*4);
+            boolean contains = false;
+            for (int m: moves){
+                if (move == m){
+                    contains = true;
+                }
+            }
+            if (!contains) {
+                moves[i] = move;
+            }
         }
     }
 

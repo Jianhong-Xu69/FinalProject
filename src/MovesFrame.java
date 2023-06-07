@@ -3,12 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MovesFrame extends JFrame implements ActionListener {
+public class MovesFrame extends MainFrame implements ActionListener {
 
     JButton move1;
     JButton move2;
     JButton move3;
+    Character c;
     MovesFrame(Character c){
+        this.c = c;
         JLabel buttonLabel;
         for (int i = 0; i < 3; i++) {
             buttonLabel = new JLabel();
@@ -23,6 +25,8 @@ public class MovesFrame extends JFrame implements ActionListener {
                 } else if (move == 3){
                     buttonLabel.setText("Rapid Fire (Cost: 5)");
                 }
+                this.setTitle("Ammunition: " + c.getResource());
+                buttonLabel.setBackground(new Color((int) (Math.random()*50)+100, (int) (Math.random()*50)+100, 255));
             } else if (c instanceof Melee){
                 if (move == 0){
                     buttonLabel.setText("Slash (Cost: 0)");
@@ -33,6 +37,8 @@ public class MovesFrame extends JFrame implements ActionListener {
                 } else if (move == 3){
                     buttonLabel.setText("Bludgeon (Cost: 5)");
                 }
+                buttonLabel.setBackground(new Color(255, (int) (Math.random()*50)+100, (int) (Math.random()*50)+100));
+                this.setTitle("Stamina: " + c.getResource());
             } else if (c instanceof Wizard){
                 if (move == 0){
                     buttonLabel.setText("Heal (Cost: 0)");
@@ -43,19 +49,20 @@ public class MovesFrame extends JFrame implements ActionListener {
                 } else if (move == 3){
                     buttonLabel.setText("Ensnare (Cost: 3)");
                 }
+                this.setTitle("Mana: " + c.getResource());
+                buttonLabel.setBackground(new Color((int) (Math.random()*50)+100, 255, (int) (Math.random()*50)+100));
             } else {
                 buttonLabel.setText("Placeholder");
             }
             buttonLabel.setHorizontalTextPosition(JLabel.CENTER);
-            buttonLabel.setVerticalTextPosition(JLabel.TOP);
+            buttonLabel.setVerticalTextPosition(JLabel.CENTER);
             buttonLabel.setForeground(new Color(0, 0, 0));
-            buttonLabel.setBackground(new Color(255, 255, 255));
             buttonLabel.setOpaque(true);
-            buttonLabel.setBounds(0,0,200,110);
+            buttonLabel.setBounds(0,0,300,100);
 
             if (i == 0) {
                 move1 = new JButton();
-                move1.setBounds(0, 0, 200, 110);
+                move1.setBounds(0, 0, 300, 100);
                 move1.addActionListener(this);
                 move1.add(buttonLabel);
                 move1.setFocusable(true);
@@ -63,7 +70,7 @@ public class MovesFrame extends JFrame implements ActionListener {
                 move1.setLayout(null);
             } else if (i == 1){
                 move2 = new JButton();
-                move2.setBounds(0, 110, 200, 110);
+                move2.setBounds(0, 100, 300, 100);
                 move2.addActionListener(this);
                 move2.add(buttonLabel);
                 move2.setFocusable(true);
@@ -71,7 +78,7 @@ public class MovesFrame extends JFrame implements ActionListener {
                 move2.setLayout(null);
             } else if (i == 2){
                 move3 = new JButton();
-                move3.setBounds(0, 220, 200, 110);
+                move3.setBounds(0, 200, 300, 100);
                 move3.addActionListener(this);
                 move3.add(buttonLabel);
                 move3.setFocusable(true);
@@ -82,15 +89,30 @@ public class MovesFrame extends JFrame implements ActionListener {
 
         this.setLayout(null);
         this.setResizable(false);
-        this.setSize(200,330);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(300,330);
         this.setVisible(true);
         this.add(move1);
         this.add(move2);
         this.add(move3);
+
+    }
+
+    public int movePerformed(int i){
+        return c.getMoves()[i];
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == move1){
+            movePerformed(0);
+            dispose();
+        } else if (e.getSource() == move2) {
+            movePerformed(1);
+            dispose();
+        } else if (e.getSource() == move3){
+            movePerformed(2);
+            dispose();
+        }
     }
 }

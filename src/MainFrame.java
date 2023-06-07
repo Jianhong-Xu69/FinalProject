@@ -8,6 +8,12 @@ public class MainFrame extends JFrame implements ActionListener{
     JButton party2;
     JButton party3;
     Character[] party;
+    JButton enemy1;
+    JButton enemy2;
+    JButton enemy3;
+    Player ai;
+    JButton target;
+    MovesFrame moves;
 
     public void mainGUI(Character[] p) {
         party = p;
@@ -58,6 +64,49 @@ public class MainFrame extends JFrame implements ActionListener{
                 party3.setLayout(null);
             }
         }
+        for (int i = 0; i < 3; i++) {
+            ImageIcon enemy = new ImageIcon("src/sprites/Slime.png");
+            JLabel enemymember;
+            ai = new Player();
+            ai.generateNewParty();
+            for (int j = 0; j < 3; j++) {
+                enemymember = new JLabel();
+                enemymember.setText(ai.getParty()[j].getName());
+                enemymember.setIcon(enemy);
+                enemymember.setForeground(new Color(0, 0, 0));
+                enemymember.setBackground(new Color(255, 255, 255));
+                enemymember.setOpaque(true);
+                enemymember.setHorizontalTextPosition(JLabel.CENTER);
+                enemymember.setVerticalTextPosition(JLabel.TOP); //above, center, below
+                enemymember.setBounds(0, 0,  enemy.getIconWidth(), 330);
+
+                if (i == 0) {
+                    enemy1 = new JButton();
+                    enemy1.setBounds(0, 0, 680, 330);
+                    enemy1.addActionListener(this);
+                    enemy1.add(enemymember);
+                    enemy1.setFocusable(false);
+                    enemy1.setBackground(Color.WHITE);
+                    enemy1.setLayout(null);
+                } else if (i == 1){
+                    enemy2 = new JButton();
+                    enemy2.setBounds(0, 330, 680, 330);
+                    enemy2.addActionListener(this);
+                    enemy2.add(enemymember);
+                    enemy2.setFocusable(false);
+                    enemy2.setBackground(Color.WHITE);
+                    enemy2.setLayout(null);
+                } else if (i == 2){
+                    enemy3 = new JButton();
+                    enemy3.setBounds(0, 660, 680, 330);
+                    enemy3.addActionListener(this);
+                    enemy3.add(enemymember);
+                    enemy3.setFocusable(false);
+                    enemy3.setBackground(Color.WHITE);
+                    enemy3.setLayout(null);
+                }
+            }
+        }
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setResizable(false);
@@ -66,17 +115,26 @@ public class MainFrame extends JFrame implements ActionListener{
         this.add(party1);
         this.add(party2);
         this.add(party3);
+        this.add(enemy1);
+        this.add(enemy2);
+        this.add(enemy3);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== party1){
-            new MovesFrame(party[0]);
+            moves = new MovesFrame(party[0]);
         } else if (e.getSource()== party2){
-            System.out.println("Test");
+            moves = new MovesFrame(party[1]);
         } else if (e.getSource()== party3){
-            System.out.println("Ow");
+            moves = new MovesFrame(party[2]);
+        } else if (e.getSource()== enemy1){
+            target = enemy1;
+        } else if (e.getSource()== enemy2){
+            target = enemy2;
+        } else if (e.getSource()== enemy3) {
+            target = enemy3;
         }
     }
 }

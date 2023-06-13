@@ -3,19 +3,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MovesFrame extends MainFrame implements ActionListener {
+public class MovesFrame extends JFrame implements ActionListener {
 
     JButton move1;
     JButton move2;
     JButton move3;
-    Character c;
-    MovesFrame(Character c){
-        this.c = c;
+    Character character;
+    MovesFrame(Character character){
+        this.character = character;
+        character.rollMoves();
         JLabel buttonLabel;
         for (int i = 0; i < 3; i++) {
             buttonLabel = new JLabel();
-            int move = c.getMoves()[i];
-            if (c instanceof Gunslinger){
+            int move = character.getMoves()[i];
+            if (character instanceof Gunslinger){
                 if (move == 0){
                     buttonLabel.setText("Reload (Cost: 0)");
                 } else if (move == 1){
@@ -25,9 +26,9 @@ public class MovesFrame extends MainFrame implements ActionListener {
                 } else if (move == 3){
                     buttonLabel.setText("Rapid Fire (Cost: 5)");
                 }
-                this.setTitle("Ammunition: " + c.getResource());
+                this.setTitle("Ammunition: " + character.getResource());
                 buttonLabel.setBackground(new Color((int) (Math.random()*50)+100, (int) (Math.random()*50)+100, 255));
-            } else if (c instanceof Melee){
+            } else if (character instanceof Melee){
                 if (move == 0){
                     buttonLabel.setText("Slash (Cost: 0)");
                 } else if (move == 1){
@@ -38,8 +39,8 @@ public class MovesFrame extends MainFrame implements ActionListener {
                     buttonLabel.setText("Bludgeon (Cost: 5)");
                 }
                 buttonLabel.setBackground(new Color(255, (int) (Math.random()*50)+100, (int) (Math.random()*50)+100));
-                this.setTitle("Stamina: " + c.getResource());
-            } else if (c instanceof Wizard){
+                this.setTitle("Stamina: " + character.getResource());
+            } else if (character instanceof Wizard){
                 if (move == 0){
                     buttonLabel.setText("Heal (Cost: 0)");
                 } else if (move == 1){
@@ -49,7 +50,7 @@ public class MovesFrame extends MainFrame implements ActionListener {
                 } else if (move == 3){
                     buttonLabel.setText("Ensnare (Cost: 3)");
                 }
-                this.setTitle("Mana: " + c.getResource());
+                this.setTitle("Mana: " + character.getResource());
                 buttonLabel.setBackground(new Color((int) (Math.random()*50)+100, 255, (int) (Math.random()*50)+100));
             } else {
                 buttonLabel.setText("Placeholder");
@@ -99,7 +100,7 @@ public class MovesFrame extends MainFrame implements ActionListener {
     }
 
     public int movePerformed(int i){
-        return c.getMoves()[i];
+        return character.getMoves()[i];
     }
 
     @Override

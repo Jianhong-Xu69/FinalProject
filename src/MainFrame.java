@@ -7,29 +7,30 @@ public class MainFrame extends JFrame implements ActionListener{
     JButton party1;
     JButton party2;
     JButton party3;
-    Character[] party;
+    Player player;
     JButton enemy1;
     JButton enemy2;
     JButton enemy3;
     Player ai;
     JButton target;
+    JButton saveQuit;
     MovesFrame moves;
 
-    public void mainGUI(Character[] p) {
-        party = p;
+    MainFrame(Player p) {
+        player = p;
         for (int i = 0; i < 3; i++) {
             ImageIcon character;
             JLabel partymember;
-            if (p[i] instanceof Gunslinger) {
+            if (player.getParty()[i] instanceof Gunslinger) {
                 character = new ImageIcon("src/sprites/GSidle.png");//rightclick on image, copy path from source root
-            } else if (p[i] instanceof Melee) {
+            } else if (player.getParty()[i] instanceof Melee) {
                 character = new ImageIcon("src/sprites/MeleeIdle.png");
             } else {
                 character = new ImageIcon("src/sprites/Wizidle.png");
             }
 
             partymember = new JLabel();
-            partymember.setText(p[i].getName());
+            partymember.setText(player.getParty()[i].getName());
             partymember.setIcon(character);
             partymember.setForeground(new Color(0, 0, 0));
             partymember.setBackground(new Color(255, 255, 255));
@@ -107,6 +108,10 @@ public class MainFrame extends JFrame implements ActionListener{
                 }
             }
         }
+        saveQuit = new JButton();
+        saveQuit.addActionListener(this);
+        saveQuit.setText("Save and Quit");
+        saveQuit.setBounds(900, 950, 200, 100);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setResizable(false);
@@ -118,23 +123,27 @@ public class MainFrame extends JFrame implements ActionListener{
         this.add(enemy1);
         this.add(enemy2);
         this.add(enemy3);
+        this.add(saveQuit);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== party1){
-            moves = new MovesFrame(party[0]);
+            moves = new MovesFrame(player.getParty()[0]);
         } else if (e.getSource()== party2){
-            moves = new MovesFrame(party[1]);
+            moves = new MovesFrame(player.getParty()[1]);
         } else if (e.getSource()== party3){
-            moves = new MovesFrame(party[2]);
+            moves = new MovesFrame(player.getParty()[2]);
         } else if (e.getSource()== enemy1){
             target = enemy1;
         } else if (e.getSource()== enemy2){
             target = enemy2;
         } else if (e.getSource()== enemy3) {
             target = enemy3;
+        } else if (e.getSource()== saveQuit) {
+            player.saveToFile();
+            System.exit(0);
         }
     }
 }
